@@ -1,0 +1,60 @@
+/* style.css — Sidebar dashboard styling (simple and responsive) */
+:root{
+  --bg:#eaf7f9;
+  --card:#ffffff;
+  --accent:#00838f;
+  --muted:#6b7c7f;
+  --danger:#d32f2f;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Arial;}
+.app{display:flex;min-height:100vh;background:var(--bg);}
+
+/* Sidebar */
+.sidebar{width:260px;background:#00363a;color:#fff;padding:22px;display:flex;flex-direction:column;gap:12px}
+.brand h2{margin:0;font-size:20px}
+.brand small{color:rgba(255,255,255,0.8)}
+nav{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.nav-btn{background:transparent;border:0;color:rgba(255,255,255,0.9);text-align:left;padding:10px;border-radius:6px;cursor:pointer}
+.nav-btn:hover{background:rgba(255,255,255,0.03)}
+.nav-btn.active{background:rgba(255,255,255,0.06);font-weight:600}
+.sidebar-foot{margin-top:auto;font-size:12px;color:rgba(255,255,255,0.7)}
+
+/* Content */
+.content{flex:1;padding:26px}
+.tab{display:none}
+.active-tab{display:block}
+
+/* Cards */
+.cards{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+.card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.04);flex:1;min-width:160px}
+.card.small{flex:1 1 150px}
+.card h3{margin:0 0 6px 0}
+.big{font-size:28px;font-weight:700;color:var(--accent)}
+.muted{font-size:12px;color:var(--muted)}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+thead th{background:#f3fbfb;padding:10px;border-bottom:1px solid #eee;text-align:left}
+tbody td{padding:10px;border-bottom:1px solid #f0f0f0}
+
+/* Charts row */
+.chart-row, #history-chart-row{margin-top:18px;background:var(--card);padding:12px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+
+/* Sim controls */
+.sim-controls{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.cta{padding:8px 10px;border-radius:6px;border:0;background:#00a8a0;color:#fff;cursor:pointer}
+.cta.secondary{background:transparent;border:1px solid rgba(255,255,255,0.12)}
+.small{font-size:12px;color:var(--muted)}
+
+/* Alerts */
+.alert-badge{display:inline-block;padding:6px 8px;border-radius:6px;background:var(--danger);color:#fff;margin:6px 6px 0 0}
+
+/* Responsive */
+@media (max-width:900px){
+  .app{flex-direction:column}
+  .sidebar{width:100%;flex-direction:row;align-items:center;gap:8px;padding:12px}
+  nav{flex-direction:row;overflow:auto}
+  .content{padding:12px}
+}

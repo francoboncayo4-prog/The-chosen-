@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Environment Dashboard — Sidebar</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for simple charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase SDK v8 (realtime DB) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h2>Env Monitor</h2>
+        <small>Philippines</small>
+      </div>
+
+      <nav>
+        <button class="nav-btn active" data-tab="live">Live Sensors</button>
+        <button class="nav-btn" data-tab="hourly">Hourly Averages</button>
+        <button class="nav-btn" data-tab="daily">Daily Summary</button>
+        <button class="nav-btn" data-tab="history">History</button>
+        <button class="nav-btn" data-tab="alerts">Alerts</button>
+        <hr />
+        <div class="sim-controls">
+          <button id="startSim" class="cta">Start Simulation</button>
+          <button id="stopSim" class="cta secondary">Stop Simulation</button>
+          <small class="muted">Simulation writes test data to your Firebase.</small>
+        </div>
+      </nav>
+
+      <footer class="sidebar-foot">
+        <small>Project: virtual-esp32-monitor-2dbca</small>
+      </footer>
+    </aside>
+
+    <main class="content">
+      <!-- Live Sensors -->
+      <section id="live" class="tab active-tab">
+        <h1>Live Sensors</h1>
+        <div class="cards">
+          <div class="card">
+            <h3>Temperature</h3>
+            <div class="big" id="live-temp">-- °C</div>
+          </div>
+          <div class="card">
+            <h3>Humidity</h3>
+            <div class="big" id="live-hum">-- %</div>
+          </div>
+          <div class="card">
+            <h3>UV Index</h3>
+            <div class="big" id="live-uv">--</div>
+          </div>
+          <div class="card">
+            <h3>Light</h3>
+            <div class="big" id="live-light">-- lux</div>
+          </div>
+        </div>
+        <div class="chart-row">
+          <canvas id="liveChart" height="120"></canvas>
+        </div>
+      </section>
+
+      <!-- Hourly Averages -->
+      <section id="hourly" class="tab">
+        <h1>Hourly Averages (current hour updates live)</h1>
+        <div class="cards">
+          <div class="card small">
+            <h4>Avg Temp (current hour)</h4>
+            <div id="hour-avg-temp">-- °C</div>
+          </div>
+          <div class="card small">
+            <h4>Avg Humidity (current hour)</h4>
+            <div id="hour-avg-hum">-- %</div>
+          </div>
+          <div class="card small">
+            <h4>Avg UV (current hour)</h4>
+            <div id="hour-avg-uv">--</div>
+          </div>
+          <div class="card small">
+            <h4>Avg Light (current hour)</h4>
+            <div id="hour-avg-light">-- lux</div>
+          </div>
+        </div>
+
+        <h3>Recent hourly averages</h3>
+        <table id="hourly-table">
+          <thead>
+            <tr>
+              <th>Hour (key)</th>
+              <th>Avg Temp (°C)</th>
+              <th>Avg Humidity (%)</th>
+              <th>Avg UV</th>
+              <th>Avg Light (lux)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Daily Summary -->
+      <section id="daily" class="tab">
+        <h1>Daily Summary</h1>
+        <div id="daily-list"></div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="tab">
+        <h1>History</h1>
+        <p>Shows the last 24 hourly averages.</p>
+        <div id="history-chart-row">
+          <canvas id="historyChart" height="140"></canvas>
+        </div>
+        <table id="history-table">
+          <thead>
+            <tr><th>Hour</th><th>Temp</th><th>Hum</th><th>UV</th><th>Light</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Alerts -->
+      <section id="alerts" class="tab">
+        <h1>Alerts</h1>
+        <div id="alerts-list">
+          <p>No alerts yet.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- App script -->
+  <script src="app.js" defer></script>
+</body>
+</html>
